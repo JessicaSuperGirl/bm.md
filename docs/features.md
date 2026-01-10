@@ -298,6 +298,14 @@ greet('World')
 
 ### 高级功能
 
+#### 脚注
+
+Markdown[^1] 是一种轻量级标记语言，由 John Gruber[^gruber] 于 2004 年创建。
+
+[^1]: Markdown 文件通常使用 `.md` 或 `.markdown` 扩展名。
+
+[^gruber]: John Gruber 是 Daring Fireball 博客的创始人。
+
 #### 数学公式
 
 支持 KaTeX 渲染。行内公式：$E = mc^2$，质能方程揭示了质量与能量的关系。
@@ -324,11 +332,3 @@ $$
 
 > [!CAUTION]
 > 这是危险警告，可能导致数据丢失或不可逆操作。
-
-#### 脚注
-
-Markdown[^1] 是一种轻量级标记语言，由 John Gruber[^gruber] 于 2004 年创建。
-
-[^1]: Markdown 文件通常使用 `.md` 或 `.markdown` 扩展名。
-
-[^gruber]: John Gruber 是 Daring Fireball 博客的创始人。
