@@ -88,9 +88,8 @@ const rehypeFootnoteLinks: Plugin<[], Root> = () => {
                 type: 'element',
                 tagName: 'span',
                 properties: { className: ['footnote-text'] },
-                children: [{ type: 'text', value: link.text }],
+                children: [{ type: 'text', value: `${link.text}: ` }],
               },
-              { type: 'text', value: ': ' },
               {
                 type: 'element',
                 tagName: 'a',

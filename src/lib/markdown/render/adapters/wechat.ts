@@ -288,9 +288,8 @@ const rehypeWechatFootnoteLinks: Plugin<[], Root> = () => (tree) => {
               type: 'element',
               tagName: 'span',
               properties: {},
-              children: [{ type: 'text', value: link.text || link.href }],
+              children: [{ type: 'text', value: `${link.text || link.href}: ` }],
             },
-            { type: 'text', value: ': ' },
             {
               type: 'element',
               tagName: 'span',

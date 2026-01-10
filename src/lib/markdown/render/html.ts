@@ -17,7 +17,7 @@ import { unified } from 'unified'
 import { getCodeThemeById } from '@/themes/code-theme'
 import { getMarkdownStyleById } from '@/themes/markdown-style'
 import { getAdapterPlugins } from './adapters'
-import { rehypeFigureWrapper, rehypeFootnoteLinks, remarkFrontmatterTable } from './plugins'
+import { rehypeDivToSection, rehypeFigureWrapper, rehypeFootnoteLinks, remarkFrontmatterTable } from './plugins'
 
 export interface RenderOptions {
   markdown: string
@@ -45,11 +45,13 @@ const sanitizeSchema = {
     'svg',
     'path',
     'figcaption',
+    'section',
   ],
   attributes: {
     ...defaultSchema.attributes,
     a: [...(defaultSchema.attributes?.a || []), 'target', 'rel'],
     div: [...(defaultSchema.attributes?.div || []), 'className'],
+    section: [...(defaultSchema.attributes?.section || []), 'className'],
     p: [...(defaultSchema.attributes?.p || []), 'className'],
     svg: ['className', 'viewBox', 'version', 'width', 'height', 'ariaHidden'],
     path: ['d'],
@@ -63,7 +65,11 @@ function createProcessor({ enableFootnoteLinks, openLinksInNewWindow, platform =
     .use(remarkMath)
     .use(remarkFrontmatter, ['yaml', 'toml'])
     .use(remarkFrontmatterTable)
-    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(remarkRehype, {
+      allowDangerousHtml: true,
+      footnoteLabel: '脚注',
+      footnoteBackLabel: '返回正文',
+    })
 
   if (openLinksInNewWindow) {
     processor.use(rehypeExternalLinks, {
@@ -88,6 +94,8 @@ function createProcessor({ enableFootnoteLinks, openLinksInNewWindow, platform =
   for (const plugin of adapterPlugins) {
     processor.use(plugin)
   }
+
+  processor.use(rehypeDivToSection)
 
   processor.use(rehypeStringify, { allowDangerousHtml: true })
 

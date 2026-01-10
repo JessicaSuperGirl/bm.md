@@ -115,6 +115,15 @@ describe('markdown -> html render (general)', () => {
 
     expect(html).toContain('markdown-alert')
   })
+
+  it('converts div to section for platform compatibility', async () => {
+    const markdown = '> [!NOTE]\n> 这是一个提示'
+    const html = await render({ markdown })
+
+    expect(html).toContain('<section')
+    expect(html).toContain('class="markdown-alert')
+    expect(html).not.toMatch(/<div[^>]*class="markdown-alert/)
+  })
 })
 
 describe('platform-specific rendering', () => {
