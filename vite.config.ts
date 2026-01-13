@@ -10,17 +10,19 @@ import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import viteTsConfigPaths from 'vite-tsconfig-paths'
 import { name } from './package.json'
-import { cssRawMinifyPlugin, htmlRawMinifyPlugin, markdownPlugin } from './scripts/vite'
+import { cssRawMinifyPlugin, fixNitroInlineDynamicImports, htmlRawMinifyPlugin, markdownPlugin } from './scripts/vite'
 import { appConfig } from './src/config/app'
 
 const require = createRequire(import.meta.url)
+const isAliyunESA = Boolean(process.env.AliUid)
+const isTencentEdgeOne = process.env.HOME === '/dev/shm/home' && process.env.TMPDIR === '/dev/shm/tmp'
 
 let customPreset: string | undefined
-if (process.env.AliUid) {
+if (isAliyunESA) {
   // 阿里云 ESA
   customPreset = './preset/aliyun-esa/nitro.config.ts'
 }
-else if (process.env.HOME === '/dev/shm/home' && process.env.TMPDIR === '/dev/shm/tmp') {
+else if (isTencentEdgeOne) {
   // 腾讯云 EdgeOne
   customPreset = './preset/tencent-edgeone/nitro.config.ts'
 }
@@ -28,29 +30,35 @@ else if (process.env.HOME === '/dev/shm/home' && process.env.TMPDIR === '/dev/sh
 console.info('Using Nitro Preset:', customPreset || 'auto')
 
 const config = defineConfig({
+  preview: {
+    host: process.env.DOCKERIZED ? true : undefined,
+  },
   plugins: [
+    fixNitroInlineDynamicImports(),
     // analyzer(),
     cssRawMinifyPlugin(),
     htmlRawMinifyPlugin(),
     markdownPlugin(),
     devtools(),
-    ...(process.env.NODE_ENV !== 'test'
-      ? [nitro({
-          preset: customPreset,
-          cloudflare: {
-            wrangler: {
-              name,
-              observability: { enabled: true },
-              keep_vars: true,
+    ...(
+      process.env.NODE_ENV !== 'test'
+      && !process.env.DOCKERIZED
+        ? [nitro({
+            preset: customPreset,
+            cloudflare: {
+              wrangler: {
+                name,
+                observability: { enabled: true },
+                keep_vars: true,
+              },
             },
-          },
-          vercel: {
-            functions: {
-              runtime: 'bun1.x',
+            vercel: {
+              functions: {
+                runtime: 'bun1.x',
+              },
             },
-          },
-        })]
-      : []),
+          })]
+        : []),
     // this is the plugin that enables path aliases
     viteTsConfigPaths({
       projects: ['./tsconfig.json'],
@@ -58,8 +66,11 @@ const config = defineConfig({
     tailwindcss(),
     tanstackStart({
       prerender: {
-        // enabled: true,
-        filter: ({ path }) => path === '/' || path.startsWith('/docs'),
+        enabled: isAliyunESA,
+        filter: ({ path }) =>
+          path === '/'
+          || path === '/about'
+          || path.startsWith('/docs'),
       },
     }),
     viteReact({
@@ -70,6 +81,7 @@ const config = defineConfig({
     VitePWA({
       strategies: 'injectManifest',
       srcDir: 'src',
+      outDir: isAliyunESA ? 'dist/client' : '.output/public',
       filename: 'sw.ts',
       registerType: 'autoUpdate',
       manifest: {
@@ -115,6 +127,11 @@ const config = defineConfig({
   },
   worker: {
     format: 'es',
+    plugins: () => [
+      viteTsConfigPaths({
+        projects: ['./tsconfig.json'],
+      }),
+    ],
   },
 })
 

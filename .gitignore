@@ -165,13 +165,14 @@ dist
 .output
 .vinxi
 .wrangler
+.vercel
+.edgeone
 
 .dev
 esa.jsonc
 
 edge-functions
 node-functions
-.edgeone
 
 .worktrees/
 dev-dist/

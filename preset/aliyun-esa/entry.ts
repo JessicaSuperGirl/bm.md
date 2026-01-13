@@ -1,4 +1,4 @@
-import server from 'node_modules/.nitro/vite/services/ssr/server.js'
+import server from 'node_modules/.nitro/vite/services/ssr/index.js'
 import { preloadEdgeKVEnv } from './env'
 
 export default {

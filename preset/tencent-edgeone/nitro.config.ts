@@ -5,6 +5,9 @@ export default <NitroPreset>{
   extends: 'node',
   minify: false,
   entry: join(__dirname, 'entry.ts'),
+  commands: {
+    // preview: 'edgeone pages dev',
+  },
   rollupConfig: {
     output: {
       format: 'module',

@@ -7,6 +7,7 @@ RUN corepack enable
 WORKDIR /app
 COPY . .
 
+ENV DOCKERIZED=true
 ENV CI=true
 ENV SKIP_INSTALL_SIMPLE_GIT_HOOKS=true
 
