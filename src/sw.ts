@@ -13,10 +13,10 @@ cleanupOutdatedCaches()
 
 precacheAndRoute(self.__WB_MANIFEST)
 
-// 导航请求回退到预缓存的 index.html
+// 导航请求回退到预缓存的 / 页面，排除 API 路径
 registerRoute(
   new NavigationRoute(
-    createHandlerBoundToURL('/index.html'),
+    createHandlerBoundToURL('/'),
     {
       denylist: [/^\/api\//],
     },
