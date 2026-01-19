@@ -1,5 +1,6 @@
 import type { Platform } from '@/lib/markdown/render/adapters'
 import { useCallback, useState } from 'react'
+import { getMarkdownLocaleTexts } from '@/lib/locale'
 import { useEditorStore } from '@/stores/editor'
 import { useFilesStore } from '@/stores/files'
 import { usePreviewStore } from '@/stores/preview'
@@ -41,6 +42,7 @@ export function usePlatformCopy(platform: Platform): PlatformCopyResult {
         enableFootnoteLinks,
         openLinksInNewWindow,
         platform,
+        ...getMarkdownLocaleTexts(),
       })
       setRenderedHtml(platform, result.result)
       return result.result

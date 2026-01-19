@@ -4,20 +4,13 @@ import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { usePreviewScrollSync } from '@/components/markdown/hooks/use-scroll-sync'
 import { Phone } from '@/components/mockups/iphone'
 import { Safari } from '@/components/mockups/safari'
+import { getMarkdownLocaleTexts } from '@/lib/locale'
 import { useEditorStore } from '@/stores/editor'
 import { useFilesStore } from '@/stores/files'
 import { PREVIEW_WIDTH_MOBILE, usePreviewStore } from '@/stores/preview'
 import iframeShell from './iframe-shell.html?raw'
 
 const RENDER_DEBOUNCE_MS = 100
-
-const LOCALE_TEXTS: Record<string, { footnoteLabel: string, referenceTitle: string }> = {
-  'zh-CN': { footnoteLabel: '脚注', referenceTitle: '参考链接' },
-}
-
-function getLocaleTexts() {
-  return LOCALE_TEXTS[navigator.language]
-}
 
 export default function MarkdownRender() {
   const content = useFilesStore(state => state.currentContent)
@@ -145,7 +138,7 @@ export default function MarkdownRender() {
           customCss: customCssValue,
           enableFootnoteLinks: enableRefLinks,
           openLinksInNewWindow: openNewWin,
-          ...getLocaleTexts(),
+          ...getMarkdownLocaleTexts(),
         })
 
         if (!canceledRef.current) {
