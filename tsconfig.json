@@ -11,7 +11,8 @@
       "@/*": ["./src/*"],
       "@/package.json": ["./package.json"],
       "@/README.md": ["./README.md"],
-      "@/docs/*": ["./docs/*"]
+      "@/docs/*": ["./docs/*"],
+      "@/skills/*": ["./skills/*"]
     },
     "resolveJsonModule": true,
     "types": ["vite/client", "vite-plugin-pwa/client"],

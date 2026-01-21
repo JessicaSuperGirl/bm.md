@@ -3,8 +3,8 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { CopyButton } from '@/components/copy-button'
 import PageDialog from '@/components/dialog/page'
-import markdown from '@/content/skill.md?raw'
 import { createPageHead } from '@/lib/seo'
+import markdown from '@/skills/bm-md/SKILL.md?raw'
 
 export const Route = createFileRoute('/_layout/docs/skill')({
   loader: () => {
