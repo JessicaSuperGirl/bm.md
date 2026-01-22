@@ -17,14 +17,12 @@ interface PageDialogProps extends useRenderType.ComponentProps<'div'> {
   title?: string
   description?: string
   className?: string
-  actions?: React.ReactNode
 }
 
 export default function PageDialog({
-  title = 'Preview',
+  title = '',
   description,
   className,
-  actions,
   render,
   ...props
 }: PageDialogProps) {
@@ -63,11 +61,6 @@ export default function PageDialog({
               <DialogDescription>{description}</DialogDescription>
             )}
           </DialogHeader>
-          {actions && (
-            <div className="-mt-2 flex shrink-0 gap-1">
-              {actions}
-            </div>
-          )}
         </div>
         <div className="mt-4 flex-1 overflow-y-auto">
           {contentElement}
