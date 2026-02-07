@@ -15,14 +15,14 @@ export function EditorFallback() {
           [animation-delay:0s]
         `}
         >
-          b
+          H
         </span>
         <span className={`
           animate-wave-bounce
           [animation-delay:0.1s]
         `}
         >
-          m
+          z
         </span>
       </div>
     </div>
