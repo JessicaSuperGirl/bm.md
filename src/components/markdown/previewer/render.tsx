@@ -200,7 +200,7 @@ export default function MarkdownRender() {
     <Safari
       className="h-full w-full"
       style={{ maxWidth: previewWidth }}
-      url="bm.md"
+      url="hertz.md"
       mode="simple"
     >
       {iframeContent}
