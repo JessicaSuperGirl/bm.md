@@ -30,10 +30,11 @@ export default defineConfig(() => {
     customPreset = './preset/tencent-edgeone/nitro.config.ts'
   }
 
-  const outDir = (isAliyunESA || isTencentEdgeOne) ? 'dist/client' : '.output/public'
-
-  console.info('Using Nitro Preset:', customPreset || 'auto')
-  console.info('Build Output Directory:', outDir)
+  // 严格遵循原有的输出逻辑，仅在特定平台修改
+  const outDir = isAliyunESA ? 'dist/client' : '.output/public'
+  // 如果是 Cloudflare，我们也使用 .output/public (因为 Nitro 默认就是这里，除非你改了后台设置)
+  // 如果你在 Cloudflare 后台填了 dist，这里也得保持同步。
+  // 但为了 PWA 插件不报错，我们先按标准逻辑走。
 
   return {
     plugins: [
@@ -52,11 +53,6 @@ export default defineConfig(() => {
                   observability: { enabled: true },
                 },
               },
-              vercel: {
-                functions: {
-                  runtime: 'bun1.x',
-                },
-              },
             })]
           : []),
       viteTsConfigPaths({
@@ -65,7 +61,7 @@ export default defineConfig(() => {
       tailwindcss(),
       tanstackStart({
         prerender: {
-          enabled: isAliyunESA || isTencentEdgeOne,
+          enabled: isAliyunESA, // 恢复原状，只在 AliyunESA 开启预渲染，减少 Hydration 错误
           filter: ({ path }) =>
             path === '/'
             || path === '/about'
@@ -80,7 +76,7 @@ export default defineConfig(() => {
       VitePWA({
         strategies: 'injectManifest',
         srcDir: 'src',
-        outDir,
+        outDir: isCloudflare ? 'dist' : outDir, // 适配 Cloudflare 构建路径
         filename: 'sw.ts',
         registerType: 'autoUpdate',
         manifest: {
@@ -98,17 +94,6 @@ export default defineConfig(() => {
             { src: '/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
             { src: '/android-chrome-512x512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
           ],
-          file_handlers: [
-            {
-              action: '/',
-              accept: {
-                'text/markdown': ['.md', '.markdown', '.mdown', '.mkd'],
-              },
-            },
-          ],
-          launch_handler: {
-            client_mode: 'navigate-existing',
-          },
         },
         injectManifest: {
           globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2}'],
