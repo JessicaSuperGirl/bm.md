@@ -21,9 +21,9 @@ async function generateSpec() {
 
   return generator.generate(router, {
     info: {
-      title: 'bm.md API',
+      title: 'hertz.md API',
       version,
-      description: 'OpenAPI specification for the bm.md API.',
+      description: 'OpenAPI specification for the hertz.md API.',
     },
     servers: SERVERS?.map(server => ({ url: server })),
   })
