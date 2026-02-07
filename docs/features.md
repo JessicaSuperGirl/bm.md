@@ -1,6 +1,6 @@
-# bm.md
+# Hertz.md
 
-bm.md 是一个专业的 Markdown 排版工具，专为内容创作者设计。本文档详细介绍所有功能特性。
+Hertz.md 是一个专业的 Markdown 排版工具，专为内容创作者设计。本文档详细介绍所有功能特性。
 
 ---
 
@@ -143,7 +143,7 @@ bm.md 是一个专业的 Markdown 排版工具，专为内容创作者设计。�
 在主题样式基础上进行二次定制：
 
 - 点击预览区工具栏的画笔图标打开配置
-- CSS 选择器需约束在 `#bm-md` 下
+- CSS 选择器需约束在 `#Hertz-md` 下
 - 自定义样式在主题样式之后应用，可覆盖默认样式
 - 支持通过 API/MCP 传入 `customCss` 参数
 - 配置自动保存到本地存储
@@ -152,17 +152,17 @@ bm.md 是一个专业的 Markdown 排版工具，专为内容创作者设计。�
 
 ```css
 /* 修改标题颜色 */
-#bm-md h1 {
+#Hertz-md h1 {
   color: #e74c3c;
 }
 
 /* 调整段落行高 */
-#bm-md p {
+#Hertz-md p {
   line-height: 1.8;
 }
 
 /* 自定义引用块样式 */
-#bm-md blockquote {
+#Hertz-md blockquote {
   border-left-color: #9b59b6;
   background: #f8f4fc;
 }
@@ -241,7 +241,7 @@ bm.md 是一个专业的 Markdown 排版工具，专为内容创作者设计。�
 
 - 离线可用 - 核心功能无需网络
 - 可安装 - 支持添加到主屏幕
-- 文件关联 - 支持在操作系统中直接用 bm.md 打开 `.md` 文件
+- 文件关联 - 支持在操作系统中直接用 Hertz.md 打开 `.md` 文件
 
 ---
 
@@ -329,9 +329,9 @@ greet('World')
 
 #### 链接与图片
 
-这是一个[普通链接](https://bm.md)，这是一个[带标题的链接](https://bm.md 'bm.md 官网')。
+这是一个[普通链接](https://Hertz.md)，这是一个[带标题的链接](https://Hertz.md 'Hertz.md 官网')。
 
-![bm.md](https://bm.md/banner.png)
+![赵露思](https://i.mji.rip/2026/02/07/93cee293c99502386830f7db97052d3b.png)
 
 ---
 
@@ -354,9 +354,9 @@ greet('World')
 
 #### 自动链接
 
-直接输入 URL 自动识别：https://bm.md
+直接输入 URL 自动识别：https://movie.hertzhe.dpdns.org
 
-邮箱地址也支持：bm.md@bm.md
+邮箱地址也支持：Hertz.md@Hertz.md
 
 ---
 
