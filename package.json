@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite dev --port 2663",
     "build": "pnpm openapi:generate && vite build",
+    "build:cf": "BUILD_TARGET=cloudflare pnpm run build",
     "openapi:generate": "tsx --import ./scripts/ignore-css/register.mjs scripts/generate-openapi.ts",
     "preview": "vite preview",
     "test": "vitest run",
