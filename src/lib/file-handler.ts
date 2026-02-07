@@ -1,6 +1,6 @@
 import { useFilesStore } from '@/stores/files'
 
-const LAUNCH_HANDLED_KEY = 'bm.md.launch-handled'
+const LAUNCH_HANDLED_KEY = 'hertz.md.launch-handled'
 
 export function initFileHandler() {
   if (!('launchQueue' in window))
@@ -35,7 +35,7 @@ export function initFileHandler() {
         lastCreatedId = id
       }
       catch (err) {
-        console.error('[bm.md] 无法读取文件:', err)
+        console.error('[hertz.md] 无法读取文件:', err)
       }
     }
 
