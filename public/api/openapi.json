@@ -1,8 +1,8 @@
 {
   "info": {
-    "title": "bm.md API",
+    "title": "hertz.md API",
     "version": "0.1.0",
-    "description": "OpenAPI specification for the bm.md API."
+    "description": "OpenAPI specification for the hertz.md API."
   },
   "servers": [
     {
@@ -108,7 +108,7 @@
                     "type": "string",
                     "maxLength": 50000,
                     "default": "",
-                    "description": "自定义 CSS 样式，在主题样式之后应用。选择器需约束在 #bm-md 下，例如：#bm-md h1 { color: red; }"
+                    "description": "自定义 CSS 样式，在主题样式之后应用。选择器需约束在 #hertz-md 下，例如：#hertz-md h1 { color: red; }"
                   },
                   "enableFootnoteLinks": {
                     "type": "boolean",
