@@ -31,7 +31,7 @@ interface FilesState {
   setHasHydrated: (value: boolean) => void
 }
 
-const DEFAULT_FILE_NAME = 'bm.md'
+const DEFAULT_FILE_NAME = 'Hertz.md'
 
 function extractH1Title(content: string): string | null {
   const lines = content.split('\n')
