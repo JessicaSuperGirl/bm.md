@@ -175,7 +175,7 @@ if (import.meta.env.DEV) {
     const hotkeyId = `${shift ? 'shift+' : ''}${key.toLowerCase()}`
     if (hotkeyToCommand.has(hotkeyId)) {
       console.warn(
-        `[bm.md] 快捷键冲突: Cmd/Ctrl+${hotkeyId.toUpperCase()} 同时绑定到 "${hotkeyToCommand.get(hotkeyId)}" 和 "${command}"`,
+        `[hertz.md] 快捷键冲突: Cmd/Ctrl+${hotkeyId.toUpperCase()} 同时绑定到 "${hotkeyToCommand.get(hotkeyId)}" 和 "${command}"`,
       )
     }
     hotkeyToCommand.set(hotkeyId, command)
